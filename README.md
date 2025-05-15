@@ -39,3 +39,9 @@ npm run deploy
 ---
 
 ## ❤️ Mit Liebe gebaut von [Ragnowinski](https://github.com/ragnowinski)
+
+---
+
+## Lizenz
+
+MIT – siehe [LICENSE](./LICENSE)
