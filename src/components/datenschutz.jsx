@@ -7,7 +7,7 @@ const Datenschutz = () => {
             <h1 className="text-xl font-bold mb-4 text-neutral-900 dark:text-white">Datenschutzerklärung</h1>
 
             <p className="mb-4">
-                Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung personenbezogener Daten (nachfolgend kurz „Daten“) innerhalb meines Onlineangebotes auf.
+                Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung personenbezogener Daten (nachfolgend kurz „Daten“) innerhalb unseres Onlineangebotes auf.
                 Es werden keine personenbezogenen Daten gespeichert, ausgewertet oder an Dritte weitergegeben.
             </p>
 
@@ -18,17 +18,17 @@ const Datenschutz = () => {
 
             <p className="mb-4">
                 <strong>Keine Cookies, keine Analyse</strong><br />
-                Ich verwenden keine Cookies, kein Tracking und keine Analyse-Tools.
+                Wir verwenden keine Cookies, kein Tracking und keine Analyse-Tools.
             </p>
 
             <p className="mb-4">
-                <strong>Externe Schriftarten</strong><br />
-                Diese Website nutzt Google Fonts über einen Serveraufruf. Dabei kann Ihre IP-Adresse an Google (USA) übertragen werden. Ich arbeite daran, die Schriften lokal einzubinden, um die Datenschutzanforderungen zu verbessern.
+                <strong>Schriftarten</strong><br />
+                Diese Website verwendet JetBrains Mono, eingebunden über lokale Dateien. Es findet keine Verbindung zu Servern Dritter (z. B. Google Fonts) statt.
             </p>
 
             <p className="mb-4">
                 <strong>Kontakt</strong><br />
-                Bei Fragen zum Datenschutz kontaktieren Sie mich bitte per E-Mail: <a href="mailto:niclas@chmill.net" className="text-blue-500 dark:text-blue-400 hover:underline">niclas@chmill.net</a>
+                Bei Fragen zum Datenschutz kontaktieren Sie uns bitte per E-Mail: <a href="mailto:niclas@chmill.net" className="text-blue-500 dark:text-blue-400 hover:underline">niclas@chmill.net</a>
             </p>
 
             <div className="mt-6 text-center">
