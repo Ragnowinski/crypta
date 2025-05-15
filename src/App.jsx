@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PasswordGenerator from './components/PasswordGenerator';
 import Impressum from './components/Impressum';
+import Datenschutz from './components/Datenschutz';
 
 const App = () => (
   <Router>
