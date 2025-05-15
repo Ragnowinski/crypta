@@ -130,6 +130,7 @@ const PasswordGenerator = () => {
           <div>
             Made with Love – Ragnowinski – {new Date().getFullYear()}<br />
             <Link to="/impressum" className="text-blue-500 dark:text-blue-400 hover:underline">Impressum</Link>
+            <span className="mx-2">|</span>
             <Link to="/datenschutz" className="text-blue-500 dark:text-blue-400 hover:underline">Datenschutz</Link>
           </div>
         </footer>
