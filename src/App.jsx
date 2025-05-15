@@ -8,6 +8,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<PasswordGenerator />} />
       <Route path="/impressum" element={<Impressum />} />
+      <Route path="/datenschutz" element={<Datenschutz />} />
     </Routes>
   </Router>
 );
