@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyRound, Sun, RefreshCcw } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PasswordSettings from './PasswordSettings';
 import PasswordOutput from './PasswordOutput';
 import { generatePseudoWord } from './pseudoWordGenerator';
@@ -126,7 +127,10 @@ const PasswordGenerator = () => {
         <PasswordOutput passwords={passwords} copiedIndex={copiedIndex} copyToClipboard={copyToClipboard} darkMode={darkMode} />
 
         <footer className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          Made with Love – Ragnowinski – {new Date().getFullYear()}
+          <div>
+            Made with Love – Ragnowinski – {new Date().getFullYear()}<br />
+            <Link to="/impressum" className="text-blue-400 hover:underline">Impressum</Link>
+          </div>
         </footer>
       </div>
     </div>
