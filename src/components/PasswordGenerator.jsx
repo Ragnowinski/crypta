@@ -59,11 +59,28 @@ const PasswordGenerator = () => {
 
     if (!excludeSimilar && customExcludes) {
       const esc = customExcludes.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
-      base = base.replace(new RegExp('[' + esc + ']', 'g'), '');
-      upper = upper.replace(new RegExp('[' + esc + ']', 'g'), '');
-      digits = digits.replace(new RegExp('[' + esc + ']', 'g'), '');
-      specialSet = specialSet.replace(new RegExp('[' + esc + ']', 'g'), '');
+      const regex = new RegExp(`[${esc}]`, 'g');
+
+      base = base.replace(regex, '');
+      upper = upper.replace(regex, '');
+      digits = digits.replace(regex, '');
+      specialSet = specialSet.replace(regex, '');
+
+      console.log('Custom exclude active:', esc);
+      console.log('Character sets after exclusion:', {
+        base,
+        upper,
+        digits,
+        specialSet
+      });
+
+      if (!base.length) {
+        console.warn('Warning: base charset is empty after exclusions. Using fallback.');
+        base = 'abcdefghijklmnopqrstuvwxyz';
+      }
     }
+
+
 
     const arr = [];
     for (let i = 0; i < uppercase; i++) {
