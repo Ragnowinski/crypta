@@ -23,25 +23,14 @@ const PasswordGenerator = () => {
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [lengthError, setLengthError] = useState('');
 
-  const generate = () => {
-    const required = uppercase + specialCount + digitsCount;
-    if (required > length) {
-      setLengthError('Summe aus Großbuchstaben, Ziffern und Sonderzeichen darf die Passwortlänge nicht übersteigen.');
-      setPasswords([]);
-      return;
-    } else {
-      setLengthError('');
-    }
-    const arr = Array.from({ length: count }, () => generatePassword());
-    setPasswords(arr);
-  };
-
   const generatePassword = () => {
     if (mode === 'pseudo') {
       return generatePseudoWord(length, {
         uppercase,
         digitsCount,
-        specialCount
+        specialCount,
+        excludeSimilar,
+        customExcludes
       });
     }
 
@@ -80,8 +69,6 @@ const PasswordGenerator = () => {
       }
     }
 
-
-
     const arr = [];
     for (let i = 0; i < uppercase; i++) {
       if (upper.length) arr.push(upper[Math.floor(Math.random() * upper.length)]);
@@ -98,6 +85,19 @@ const PasswordGenerator = () => {
     return arr.sort(() => 0.5 - Math.random()).join('');
   };
 
+  const generate = () => {
+    const required = uppercase + specialCount + digitsCount;
+    if (required > length) {
+      setLengthError('Summe aus Großbuchstaben, Ziffern und Sonderzeichen darf die Passwortlänge nicht übersteigen.');
+      setPasswords([]);
+      return;
+    } else {
+      setLengthError('');
+    }
+    const arr = Array.from({ length: count }, () => generatePassword());
+    setPasswords(arr);
+  };
+
   const copyToClipboard = (pw, i) => {
     navigator.clipboard.writeText(pw);
     setCopiedIndex(i);
@@ -109,7 +109,7 @@ const PasswordGenerator = () => {
       <div className="max-w-2xl w-full">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-3xl font-bold flex items-center gap-2"><KeyRound size={28} className="text-blue-400" />Crypta Passwortgenerator</h1>
-          <button onClick={() => setDarkMode(!darkMode)} title="Dark/Light umschalten" className="p-2"><Sun size={20} /></button>
+          <button onClick={() => setDarkMode(!darkMode)} title="Dark/Light umschalten" className="p-2">{darkMode ? <Sun size={20} /> : <Sun size={20} />}</button>
         </div>
 
         {lengthError && (
