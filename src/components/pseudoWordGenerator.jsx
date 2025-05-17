@@ -1,7 +1,7 @@
 export function generatePseudoWord(length = 8, options = {}) {
     const SIMILAR = 'iloILO01';
 
-    const fullConsonants = 'bcdfghjklmnprstvwxzILO'; // absichtlich mit ähnlichen Zeichen
+    const fullConsonants = 'bcdfghjklmnprstvwxzILO';
     const fullVowels = 'aeiou';
     const fullDigits = '0123456789';
     const fullSpecials = '!@#$%&*?';
@@ -11,65 +11,59 @@ export function generatePseudoWord(length = 8, options = {}) {
         digitsCount = 1,
         specialCount = 1,
         excludeSimilar = false,
-        customExcludes = ''
+        customExcludes = '',
+        specials = fullSpecials
     } = options;
 
     let consonants = fullConsonants;
     let vowels = fullVowels;
     let digits = fullDigits;
-    let specials = fullSpecials;
+    let finalSpecials = specials || fullSpecials;
 
-    // Ähnliche Zeichen entfernen
     if (excludeSimilar) {
         const similarRegex = new RegExp(`[${SIMILAR}]`, 'g');
         consonants = consonants.replace(similarRegex, '');
         vowels = vowels.replace(similarRegex, '');
         digits = digits.replace(similarRegex, '');
-        specials = specials.replace(similarRegex, '');
+        finalSpecials = finalSpecials.replace(similarRegex, '');
     }
 
-    // Benutzerdefinierte Zeichen entfernen (nur wenn excludeSimilar aus)
     if (!excludeSimilar && customExcludes) {
         const esc = customExcludes.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
         const customRegex = new RegExp(`[${esc}]`, 'g');
         consonants = consonants.replace(customRegex, '');
         vowels = vowels.replace(customRegex, '');
         digits = digits.replace(customRegex, '');
-        specials = specials.replace(customRegex, '');
-        console.log('Custom excludes applied:', esc);
+        finalSpecials = finalSpecials.replace(customRegex, '');
     }
 
-    // Fallback bei leerem Zeichensatz
-    if (!consonants.length) consonants = 'bcdfghjkmnprstvwxz';
-    if (!vowels.length) vowels = 'aeiou';
-    if (!digits.length) digits = '123456789';
-    if (!specials.length) specials = '!@#$%&*?';
+    const getRandom = (chars) => chars.charAt(Math.floor(Math.random() * chars.length));
 
     let result = '';
-    let useConsonant = true;
-
-    while (result.length < length - (uppercase + digitsCount + specialCount)) {
-        const chars = useConsonant ? consonants : vowels;
-        result += chars[Math.floor(Math.random() * chars.length)];
-        useConsonant = !useConsonant;
+    for (let i = 0; i < Math.max(length - uppercase - digitsCount - specialCount, 0); i++) {
+        result += i % 2 === 0 ? getRandom(consonants) : getRandom(vowels);
     }
 
-    const insertRandom = (source, count) => {
-        for (let i = 0; i < count; i++) {
-            const char = source[Math.floor(Math.random() * source.length)];
-            const pos = Math.floor(Math.random() * (result.length + 1));
-            result = result.slice(0, pos) + char + result.slice(pos);
-        }
-    };
-
-    // Großbuchstaben einbauen (zufällig)
     for (let i = 0; i < uppercase; i++) {
-        const pos = Math.floor(Math.random() * result.length);
-        result = result.substring(0, pos) + result[pos].toUpperCase() + result.substring(pos + 1);
+        const pos = Math.floor(Math.random() * (result.length + 1));
+        result = result.slice(0, pos) + getRandom(consonants.toUpperCase()) + result.slice(pos);
     }
 
-    insertRandom(digits, digitsCount);
-    insertRandom(specials, specialCount);
+    for (let i = 0; i < digitsCount; i++) {
+        const pos = Math.floor(Math.random() * (result.length + 1));
+        result = result.slice(0, pos) + getRandom(digits) + result.slice(pos);
+    }
+
+    for (let i = 0; i < specialCount; i++) {
+        const pos = Math.floor(Math.random() * (result.length + 1));
+        result = result.slice(0, pos) + getRandom(finalSpecials) + result.slice(pos);
+    }
+
+    while (result.length < length) {
+        result += getRandom(consonants + vowels);
+    }
 
     return result;
 }
+
+export default generatePseudoWord;

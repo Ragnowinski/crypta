@@ -30,7 +30,8 @@ const PasswordGenerator = () => {
         digitsCount,
         specialCount,
         excludeSimilar,
-        customExcludes
+        customExcludes,
+        specials
       });
     }
 
@@ -55,16 +56,7 @@ const PasswordGenerator = () => {
       digits = digits.replace(regex, '');
       specialSet = specialSet.replace(regex, '');
 
-      console.log('Custom exclude active:', esc);
-      console.log('Character sets after exclusion:', {
-        base,
-        upper,
-        digits,
-        specialSet
-      });
-
       if (!base.length) {
-        console.warn('Warning: base charset is empty after exclusions. Using fallback.');
         base = 'abcdefghijklmnopqrstuvwxyz';
       }
     }
